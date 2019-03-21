@@ -1,12 +1,23 @@
 module.exports = function selectQueries(knex) {
   return {
-    getUserId: async(username) => {
+    getUserInfo: async(username, getUserBoards) => {
       try {
         let userId = await knex('user').select('id').where({username: username});
-        return userId[0];
+        userId = userId[0].id
+        let boards = await getUserBoards(userId);
+        return { userId, boards, username };
       }
       catch(error) {
         console.log('error getting user id', error)
+      }
+    },
+    getUserBoards: async(userId) => {
+      try {
+        let userBoards = await knex('board').select('id', 'title').where({user_id: userId});
+        return userBoards;
+      }
+      catch(error) {
+        console.log('error getting user boards', error)
       }
     }
   }

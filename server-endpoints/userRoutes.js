@@ -8,11 +8,10 @@ module.exports = function(insertQueries, selectQueries) {
 
     // add login credential check
 
-    selectQueries.getUserId(username).then(data => {
-      let userId = data.id
-      res.json({userId, username})
-    })
-
+    selectQueries.getUserInfo(username, selectQueries.getUserBoards)
+      .then(data => {
+        res.json(data)
+      })
   })
 
   return userRoutes;
