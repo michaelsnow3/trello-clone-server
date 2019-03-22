@@ -13,7 +13,7 @@ module.exports = function selectQueries(knex) {
     },
     getUserBoards: async(userId) => {
       try {
-        let userBoards = await knex('board').select('id', 'title').where({user_id: userId});
+        let userBoards = await knex('board').select('id', 'title', 'favourite').where({user_id: userId});
         return userBoards;
       }
       catch(error) {
