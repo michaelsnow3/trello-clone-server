@@ -19,7 +19,19 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('board').insert([
-        {id: 100, user_id: 100, title: 'board title'}
+        {id: 100, user_id: 100, title: 'board title', favourite: true}
+      ]);
+    })
+    .then(function () {
+      // Inserts seed entries
+      return knex('board').insert([
+        {id: 101, user_id: 100, title: 'board2 title'}
+      ]);
+    })
+    .then(function () {
+      // Inserts seed entries
+      return knex('board').insert([
+        {id: 102, user_id: 100, title: 'board3 title'}
       ]);
     })
     .then(function () {
