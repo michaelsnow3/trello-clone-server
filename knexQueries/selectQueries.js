@@ -34,7 +34,9 @@ module.exports = function selectQueries(knex) {
 
         for (let index = 0; index < lists.length; index++) {
           let listCards = await getListCards(lists[index].id);
-          boardLists.push(listCards);
+          let listId = lists[index].id;
+          let listTitle = lists[index].title;
+          boardLists.push({ listCards, listId, listTitle });
         }
 
         return boardLists;
