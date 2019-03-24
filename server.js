@@ -23,6 +23,10 @@ const insertQueries = require("./knexQueries/insertQueries.js")(knex);
 const userRoutes = require("./server-endpoints/userRoutes");
 app.use("/user/", userRoutes(insertQueries, selectQueries));
 
+// board endpoints
+const boardRoutes = require("./server-endpoints/boardRoutes");
+app.use("/board/", boardRoutes(insertQueries, selectQueries));
+
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);
 });
