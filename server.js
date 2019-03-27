@@ -27,6 +27,10 @@ app.use("/user/", userRoutes(insertQueries, selectQueries));
 const boardRoutes = require("./server-endpoints/boardRoutes");
 app.use("/board/", boardRoutes(insertQueries, selectQueries));
 
+// boards endpoints
+const boardsRoutes = require("./server-endpoints/boardsRoutes");
+app.use("/boards/", boardsRoutes(insertQueries, selectQueries));
+
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);
 });
