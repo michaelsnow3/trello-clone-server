@@ -3,7 +3,7 @@ const cardRoutes = express.Router();
 
 module.exports = function(insertQueries, selectQueries) {
   cardRoutes.post("/new/", (req, res) => {
-    let title = req.body.cardTitleValue;
+    let title = req.body.titleValue;
     let listId = req.body.listId;
 
     insertQueries
