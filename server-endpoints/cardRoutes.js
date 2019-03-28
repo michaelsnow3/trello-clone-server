@@ -1,7 +1,7 @@
 const express = require("express");
 const cardRoutes = express.Router();
 
-module.exports = function(insertQueries, selectQueries) {
+module.exports = function(insertQueries, selectQueries, updateQueries) {
   cardRoutes.post("/new/", (req, res) => {
     let title = req.body.titleValue;
     let listId = req.body.listId;
@@ -10,6 +10,12 @@ module.exports = function(insertQueries, selectQueries) {
       .addcard(title, listId)
       .then(res.json())
       .catch(error => console.log("error adding card to db", error));
+  });
+
+  cardRoutes.post("/move/", (req, res) => {
+    let targetCard = req.body.targetCard;
+    let newList = req.body.newList
+    updateQueries.moveCard(targetCard, newList).then(() => res.json())
   });
 
   return cardRoutes;

@@ -18,6 +18,7 @@ app.use(cors()).use(bodyParser());
 // knex queries
 const selectQueries = require("./knexQueries/selectQueries.js")(knex);
 const insertQueries = require("./knexQueries/insertQueries.js")(knex);
+const updateQueries = require("./knexQueries/updateQueries.js")(knex);
 
 // user endpoints
 const userRoutes = require("./server-endpoints/userRoutes");
@@ -37,7 +38,7 @@ app.use("/list/", listRoutes(insertQueries, selectQueries));
 
 // card endpoints
 const cardRoutes = require("./server-endpoints/cardRoutes");
-app.use("/card/", cardRoutes(insertQueries, selectQueries));
+app.use("/card/", cardRoutes(insertQueries, selectQueries, updateQueries));
 
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);
