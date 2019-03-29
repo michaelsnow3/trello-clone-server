@@ -1,7 +1,7 @@
 const express = require("express");
 const boardRoutes = express.Router();
 
-module.exports = function(insertQueries, selectQueries) {
+module.exports = function(insertQueries, selectQueries, deleteQureies) {
   boardRoutes.get("/:id/", (req, res) => {
     let boardId = req.params.id;
     let getListCards = selectQueries.getListCards;
@@ -18,6 +18,11 @@ module.exports = function(insertQueries, selectQueries) {
     insertQueries.addBoard(title, userId).then(() => {
       selectQueries.getUserBoards(userId).then(data => res.json(data));
     });
+  });
+
+  boardRoutes.post("/del/", (req, res) => {
+    let boardId = req.body.boardId;
+    deleteQureies.deleteBoard(boardId).then(() => res.json())
   });
 
   return boardRoutes;

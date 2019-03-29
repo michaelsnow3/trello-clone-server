@@ -19,6 +19,7 @@ app.use(cors()).use(bodyParser());
 const selectQueries = require("./knexQueries/selectQueries.js")(knex);
 const insertQueries = require("./knexQueries/insertQueries.js")(knex);
 const updateQueries = require("./knexQueries/updateQueries.js")(knex);
+const deleteQueries = require("./knexQueries/deleteQueries.js")(knex);
 
 // user endpoints
 const userRoutes = require("./server-endpoints/userRoutes");
@@ -26,7 +27,7 @@ app.use("/user/", userRoutes(insertQueries, selectQueries));
 
 // board endpoints
 const boardRoutes = require("./server-endpoints/boardRoutes");
-app.use("/board/", boardRoutes(insertQueries, selectQueries));
+app.use("/board/", boardRoutes(insertQueries, selectQueries, deleteQueries));
 
 // boards endpoints
 const boardsRoutes = require("./server-endpoints/boardsRoutes");
