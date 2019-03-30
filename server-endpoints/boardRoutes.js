@@ -21,8 +21,9 @@ module.exports = function(insertQueries, selectQueries, deleteQureies) {
   });
 
   boardRoutes.post("/del/", (req, res) => {
+    let deleteList = deleteQureies.deleteList
     let boardId = req.body.boardId;
-    deleteQureies.deleteBoard(boardId).then(() => res.json())
+    deleteQureies.deleteBoard(boardId, deleteList).then(() => res.json())
   });
 
   return boardRoutes;

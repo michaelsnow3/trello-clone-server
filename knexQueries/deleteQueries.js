@@ -1,20 +1,10 @@
 module.exports = function selectQueries(knex) {
   return {
-    deleteBoard: async boardId => {
+    deleteBoard: async (boardId, deleteList) => {
       try {
         let boardLists = await knex("list").where({ board_id: boardId });
         for (let listIndex = 0; listIndex < boardLists.length; listIndex++) {
-          let listCards = await knex("card").where({
-            list_id: boardLists[listIndex].id
-          });
-          for (let cardIndex = 0; cardIndex < listCards.length; cardIndex++) {
-            // delete all cards for board's list
-            await knex("card")
-              .where({ id: listCards[cardIndex].id })
-              .del();
-          }
-          // delete list
-          await knex("list").where({ id: boardLists[listIndex].id }).del();
+          await deleteList(boardLists[listIndex].id)
         }
         // delete board
         await knex("board")
@@ -37,8 +27,10 @@ module.exports = function selectQueries(knex) {
           .del();
       }
       // delete list
-      await knex("list").where({ id: listId }).del();
-      return
+      await knex("list")
+        .where({ id: listId })
+        .del();
+      return;
     }
   };
 };
