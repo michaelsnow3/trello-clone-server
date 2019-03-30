@@ -35,7 +35,7 @@ app.use("/boards/", boardsRoutes(insertQueries, selectQueries));
 
 // list endpoints
 const listRoutes = require("./server-endpoints/listRoutes");
-app.use("/list/", listRoutes(insertQueries, selectQueries));
+app.use("/list/", listRoutes(insertQueries, selectQueries, deleteQueries));
 
 // card endpoints
 const cardRoutes = require("./server-endpoints/cardRoutes");

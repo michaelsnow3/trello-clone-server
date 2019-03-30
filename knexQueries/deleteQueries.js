@@ -24,6 +24,21 @@ module.exports = function selectQueries(knex) {
       } catch (error) {
         console.log("error deleting board", error);
       }
+    },
+
+    deleteList: async listId => {
+      let listCards = await knex("card").where({
+        list_id: listId
+      });
+      for (let cardIndex = 0; cardIndex < listCards.length; cardIndex++) {
+        // delete all cards for list
+        await knex("card")
+          .where({ id: listCards[cardIndex].id })
+          .del();
+      }
+      // delete list
+      await knex("list").where({ id: listId }).del();
+      return
     }
   };
 };
