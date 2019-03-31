@@ -29,8 +29,15 @@ module.exports = function selectQueries(knex) {
       // delete list
       await knex("list")
         .where({ id: listId })
-        .del();
+        .del();``
       return;
+    },
+
+    deleteCard: async cardId => {
+      await knex("card")
+        .where({ id: cardId })
+        .del();
+      return
     }
   };
 };

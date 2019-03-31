@@ -39,7 +39,7 @@ app.use("/list/", listRoutes(insertQueries, selectQueries, deleteQueries));
 
 // card endpoints
 const cardRoutes = require("./server-endpoints/cardRoutes");
-app.use("/card/", cardRoutes(insertQueries, selectQueries, updateQueries));
+app.use("/card/", cardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);

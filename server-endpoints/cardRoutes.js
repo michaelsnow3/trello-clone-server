@@ -1,7 +1,12 @@
 const express = require("express");
 const cardRoutes = express.Router();
 
-module.exports = function(insertQueries, selectQueries, updateQueries) {
+module.exports = function(
+  insertQueries,
+  selectQueries,
+  updateQueries,
+  deleteQueries
+) {
   cardRoutes.post("/new/", (req, res) => {
     let title = req.body.titleValue;
     let listId = req.body.listId;
@@ -14,8 +19,13 @@ module.exports = function(insertQueries, selectQueries, updateQueries) {
 
   cardRoutes.post("/move/", (req, res) => {
     let targetCard = req.body.targetCard;
-    let newList = req.body.newList
-    updateQueries.moveCard(targetCard, newList).then(() => res.json())
+    let newList = req.body.newList;
+    updateQueries.moveCard(targetCard, newList).then(() => res.json());
+  });
+
+  cardRoutes.post("/del/", (req, res) => {
+    let cardId = req.body.cardId;
+    deleteQueries.deleteCard(cardId).then(() => res.json());
   });
 
   return cardRoutes;
