@@ -12,11 +12,12 @@ module.exports = function(insertQueries, selectQueries, deleteQueries) {
       .catch(error => console.log("error adding list to db", error));
   });
 
-  listRoutes.post('/del/', (req, res) => {
+  listRoutes.post("/del/", (req, res) => {
     let listId = req.body.listId;
+    let deleteCard = deleteQueries.deleteCard;
 
-    deleteQueries.deleteList(listId).then(() => res.json())
-  })
+    deleteQueries.deleteList(listId, deleteCard).then(() => res.json());
+  });
 
   return listRoutes;
 };
