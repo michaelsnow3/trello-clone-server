@@ -34,7 +34,6 @@ module.exports = function(
   boardRoutes.post("/edit/title/", (req, res) => {
     let boardId = req.body.boardId;
     let title = req.body.title;
-    console.log(boardId, title)
     updateQueries.updateBoardTitle(boardId, title).then(() => res.json());
   });
 

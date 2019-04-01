@@ -15,6 +15,14 @@ module.exports = function selectQueries(knex) {
         .update({ title })
         .returning("*");
         return
+    },
+
+    updateListTitle: async (listId, title) => {
+      await knex("list")
+        .where({ id: listId })
+        .update({ title })
+        .returning("*");
+        return
     }
   };
 };
