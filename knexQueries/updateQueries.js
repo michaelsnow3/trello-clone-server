@@ -9,12 +9,23 @@ module.exports = function selectQueries(knex) {
         .returning("*");
     },
 
+    updateLists: async boardLists => {
+      for (let listIndex = 0; listIndex < boardLists.length; listIndex++) {
+        let list = boardLists[listIndex];
+        await knex("list")
+          .where({ id: list.listId })
+          .update({ position: list.listPosition })
+          .returning("*");
+      }
+      return;
+    },
+
     updateBoardTitle: async (boardId, title) => {
       await knex("board")
         .where({ id: boardId })
         .update({ title })
         .returning("*");
-        return
+      return;
     },
 
     updateListTitle: async (listId, title) => {
@@ -22,7 +33,7 @@ module.exports = function selectQueries(knex) {
         .where({ id: listId })
         .update({ title })
         .returning("*");
-        return
+      return;
     },
 
     updateCardTitle: async (cardId, title) => {
@@ -30,7 +41,7 @@ module.exports = function selectQueries(knex) {
         .where({ id: cardId })
         .update({ title })
         .returning("*");
-        return
+      return;
     }
   };
 };
