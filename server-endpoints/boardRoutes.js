@@ -16,6 +16,14 @@ module.exports = function(
     });
   });
 
+  boardRoutes.get("/all/:userId/", (req, res) => {
+    let userId = req.params.userId;
+
+    selectQueries.getUserBoards(userId).then(data => {
+      res.json({ boards: data });
+    });
+  });
+
   boardRoutes.post("/new/", (req, res) => {
     let title = req.body.boardTitleValue;
     let userId = req.body.userId;

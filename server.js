@@ -29,10 +29,6 @@ app.use("/user/", userRoutes(insertQueries, selectQueries));
 const boardRoutes = require("./server-endpoints/boardRoutes");
 app.use("/board/", boardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
-// boards endpoints
-const boardsRoutes = require("./server-endpoints/boardsRoutes");
-app.use("/boards/", boardsRoutes(insertQueries, selectQueries));
-
 // list endpoints
 const listRoutes = require("./server-endpoints/listRoutes");
 app.use("/list/", listRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
