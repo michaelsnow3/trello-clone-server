@@ -22,7 +22,6 @@ module.exports = function(insertQueries, selectQueries, updateQueries, deleteQue
   listRoutes.post("/edit/title/", (req, res) => {
     let listId = req.body.listId;
     let title = req.body.title;
-    console.log(listId, title)
     updateQueries.updateListTitle(listId, title).then(() => res.json());
   });
 

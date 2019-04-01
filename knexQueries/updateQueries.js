@@ -23,6 +23,14 @@ module.exports = function selectQueries(knex) {
         .update({ title })
         .returning("*");
         return
+    },
+
+    updateCardTitle: async (cardId, title) => {
+      await knex("card")
+        .where({ id: cardId })
+        .update({ title })
+        .returning("*");
+        return
     }
   };
 };
