@@ -27,7 +27,7 @@ app.use("/user/", userRoutes(insertQueries, selectQueries));
 
 // board endpoints
 const boardRoutes = require("./server-endpoints/boardRoutes");
-app.use("/board/", boardRoutes(insertQueries, selectQueries, deleteQueries));
+app.use("/board/", boardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
 // boards endpoints
 const boardsRoutes = require("./server-endpoints/boardsRoutes");

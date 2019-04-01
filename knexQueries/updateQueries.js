@@ -5,7 +5,16 @@ module.exports = function selectQueries(knex) {
         .where({ id: targetCard.id })
         .update({
           list_id: newList.listId
-        }).returning('*')
+        })
+        .returning("*");
+    },
+
+    updateBoardTitle: async (boardId, title) => {
+      await knex("board")
+        .where({ id: boardId })
+        .update({ title })
+        .returning("*");
+        return
     }
   };
 };
