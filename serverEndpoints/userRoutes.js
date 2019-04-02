@@ -6,7 +6,7 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
     let { username, password } = req.body;
 
     selectQueries
-      .getUserInfo(username, password, selectQueries.getUserBoards, bcrypt)
+      .getUserInfo(username, password, bcrypt)
       .then(data => {
         res.json(data);
       });
