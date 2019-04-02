@@ -23,7 +23,7 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
       .then(function(hash) {
         insertQueries
           .addUser(username, hash)
-          .then(data => res.json(data))
+          .then(userId => res.json({ userId, username }))
           .catch(error => res.json({ error: error.detail }));
       })
       .catch(error => console.log("error hashing password"));

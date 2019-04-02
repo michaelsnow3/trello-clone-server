@@ -8,11 +8,10 @@ module.exports = function(
   deleteQueries
 ) {
   listRoutes.post("/new/", (req, res) => {
-    let title = req.body.listTitleValue;
-    let boardId = req.body.boardId;
+    let {title, boardId, position} = req.body
 
     insertQueries
-      .addList(title, boardId)
+      .addList(title, boardId, position)
       .then(res.json())
       .catch(error => console.log("error adding list to db", error));
   });

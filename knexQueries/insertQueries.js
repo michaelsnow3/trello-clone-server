@@ -3,8 +3,8 @@ module.exports = function insertQueries(knex) {
     addBoard: async (title, userId) => {
       await knex("board").insert({ title, user_id: userId });
     },
-    addList: async (title, boardId) => {
-      await knex("list").insert({ title, board_id: boardId });
+    addList: async (title, boardId, position) => {
+      await knex("list").insert({ title, board_id: boardId, position });
     },
     addCard: async (title, listId) => {
       await knex("card").insert({ title, list_id: listId });
