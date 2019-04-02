@@ -5,11 +5,10 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
   userRoutes.post("/login/", (req, res) => {
     let { username, password } = req.body;
 
-    selectQueries
-      .getUserInfo(username, password, bcrypt)
-      .then(data => {
-        res.json(data);
-      });
+    selectQueries.getUserInfo(username, password, bcrypt).then(userId => {
+      if (!userId) res.json({ userId: null, username: null });
+      res.json({ userId, username });
+    });
   });
 
   userRoutes.post("/register/", (req, res) => {
