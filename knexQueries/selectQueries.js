@@ -1,13 +1,29 @@
 module.exports = function selectQueries(knex) {
   return {
-    getUserInfo: async (username, getUserBoards) => {
+    getUserInfo: async (
+      username,
+      password,
+      getUserBoards,
+      bcrypt
+    ) => {
       try {
-        let userId = await knex("user")
-          .select("id")
+        let userInfo = await knex("user")
+          .select("id", "password_hash")
           .where({ username: username });
-        userId = userId[0].id;
-        let boards = await getUserBoards(userId);
-        return { userId, boards, username };
+
+        // return false if username is incorrect
+        if(!userInfo.length) return false
+
+        let userId = userInfo[0].id;
+        let userPassword = userInfo[0].password_hash;
+
+        const match = await bcrypt.compare(password, userPassword);
+        console.log(match)
+        if(match) {
+          let boards = await getUserBoards(userId);
+          return { userId, boards, username };
+        }
+        return false
       } catch (error) {
         console.log("error getting user id", error);
       }

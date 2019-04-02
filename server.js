@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bcrypt = require('bcrypt');
 
 // database setup
 const ENV = process.env.ENV || "development";
@@ -22,19 +23,19 @@ const updateQueries = require("./knexQueries/updateQueries.js")(knex);
 const deleteQueries = require("./knexQueries/deleteQueries.js")(knex);
 
 // user endpoints
-const userRoutes = require("./server-endpoints/userRoutes");
-app.use("/user/", userRoutes(insertQueries, selectQueries));
+const userRoutes = require("./serverEndpoints/userRoutes");
+app.use("/user/", userRoutes(bcrypt, insertQueries, selectQueries));
 
 // board endpoints
-const boardRoutes = require("./server-endpoints/boardRoutes");
+const boardRoutes = require("./serverEndpoints/boardRoutes");
 app.use("/board/", boardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
 // list endpoints
-const listRoutes = require("./server-endpoints/listRoutes");
+const listRoutes = require("./serverEndpoints/listRoutes");
 app.use("/list/", listRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
 // card endpoints
-const cardRoutes = require("./server-endpoints/cardRoutes");
+const cardRoutes = require("./serverEndpoints/cardRoutes");
 app.use("/card/", cardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
 
 app.listen(PORT, () => {

@@ -1,14 +1,12 @@
 const express = require("express");
 const userRoutes = express.Router();
 
-module.exports = function(insertQueries, selectQueries) {
+module.exports = function(bcrypt, insertQueries, selectQueries) {
   userRoutes.post("/login/", (req, res) => {
-    let { username, passwordHash } = req.body;
-
-    // add login credential check
+    let { username, password } = req.body;
 
     selectQueries
-      .getUserInfo(username, selectQueries.getUserBoards)
+      .getUserInfo(username, password, selectQueries.getUserBoards, bcrypt)
       .then(data => {
         res.json(data);
       });
