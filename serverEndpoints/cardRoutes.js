@@ -12,7 +12,7 @@ module.exports = function(
     let listId = req.body.listId;
 
     insertQueries
-      .addcard(title, listId)
+      .addCard(title, listId)
       .then(res.json())
       .catch(error => console.log("error adding card to db", error));
   });

@@ -12,7 +12,7 @@ module.exports = function(
     let boardId = req.body.boardId;
 
     insertQueries
-      .addlist(title, boardId)
+      .addList(title, boardId)
       .then(res.json())
       .catch(error => console.log("error adding list to db", error));
   });

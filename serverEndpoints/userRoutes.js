@@ -12,5 +12,22 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
       });
   });
 
+  userRoutes.post("/register/", (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    const saltRounds = 10;
+
+    // hash input password
+    bcrypt
+      .hash(password, saltRounds)
+      .then(function(hash) {
+        insertQueries
+          .addUser(username, hash)
+          .then(data => res.json(data))
+          .catch(error => res.json({ error: error.detail }));
+      })
+      .catch(error => console.log("error hashing password"));
+  });
+
   return userRoutes;
 };
