@@ -34,9 +34,12 @@ module.exports = function(
   });
 
   boardRoutes.post("/del/", (req, res) => {
-    let deleteList = deleteQureies.deleteList;
+    let { deleteList, deleteCard } = deleteQureies;
     let boardId = req.body.boardId;
-    deleteQureies.deleteBoard(boardId, deleteList).then(() => res.json());
+
+    deleteQureies
+      .deleteBoard(boardId, deleteList, deleteCard)
+      .then(() => res.json());
   });
 
   boardRoutes.post("/edit/title/", (req, res) => {

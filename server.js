@@ -1,5 +1,5 @@
 require("dotenv").config();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 // database setup
 const ENV = process.env.ENV || "development";
@@ -28,15 +28,24 @@ app.use("/user/", userRoutes(bcrypt, insertQueries, selectQueries));
 
 // board endpoints
 const boardRoutes = require("./serverEndpoints/boardRoutes");
-app.use("/board/", boardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
+app.use(
+  "/board/",
+  boardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries)
+);
 
 // list endpoints
 const listRoutes = require("./serverEndpoints/listRoutes");
-app.use("/list/", listRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
+app.use(
+  "/list/",
+  listRoutes(insertQueries, selectQueries, updateQueries, deleteQueries)
+);
 
 // card endpoints
 const cardRoutes = require("./serverEndpoints/cardRoutes");
-app.use("/card/", cardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries));
+app.use(
+  "/card/",
+  cardRoutes(insertQueries, selectQueries, updateQueries, deleteQueries)
+);
 
 app.listen(PORT, () => {
   console.log("Listening on port " + PORT);

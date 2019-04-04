@@ -1,10 +1,10 @@
 module.exports = function selectQueries(knex) {
   return {
-    deleteBoard: async (boardId, deleteList) => {
+    deleteBoard: async (boardId, deleteList, deleteCard) => {
       try {
         let boardLists = await knex("list").where({ board_id: boardId });
         for (let listIndex = 0; listIndex < boardLists.length; listIndex++) {
-          await deleteList(boardLists[listIndex].id);
+          await deleteList(boardLists[listIndex].id, deleteCard);
         }
         // delete board
         await knex("board")

@@ -22,11 +22,13 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
       .then(function(hash) {
         insertQueries
           .addUser(username, hash)
-          .then(userId => res.json({ userId, username }))
+          .then(userId => {
+            req.session.user_id = userId;
+            res.json({ userId, username });
+          })
           .catch(error => res.json({ error: error.detail }));
       })
       .catch(error => console.log("error hashing password"));
   });
-
   return userRoutes;
 };
