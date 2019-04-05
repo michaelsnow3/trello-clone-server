@@ -24,7 +24,10 @@ const deleteQueries = require("./knexQueries/deleteQueries.js")(knex);
 
 // user endpoints
 const userRoutes = require("./serverEndpoints/userRoutes");
-app.use("/user/", userRoutes(bcrypt, insertQueries, selectQueries));
+app.use(
+  "/user/",
+  userRoutes(bcrypt, process.env.SECRET, insertQueries, selectQueries)
+);
 
 // board endpoints
 const boardRoutes = require("./serverEndpoints/boardRoutes");

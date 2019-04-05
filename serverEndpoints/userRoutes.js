@@ -1,13 +1,17 @@
 const express = require("express");
 const userRoutes = express.Router();
+const jwt = require("jsonwebtoken");
 
-module.exports = function(bcrypt, insertQueries, selectQueries) {
+module.exports = function(bcrypt, SECRET, insertQueries, selectQueries) {
   userRoutes.post("/login/", (req, res) => {
     let { username, password } = req.body;
 
     selectQueries.getUserInfo(username, password, bcrypt).then(userId => {
       if (!userId) res.json({ userId: null, username: null });
-      res.json({ userId, username });
+      let token = jwt.sign({ username, userId }, SECRET, {
+        expiresIn: "24h" // expires in 24 hours
+      });
+      res.json({ userId, username, token });
     });
   });
 
@@ -23,12 +27,18 @@ module.exports = function(bcrypt, insertQueries, selectQueries) {
         insertQueries
           .addUser(username, hash)
           .then(userId => {
-            req.session.user_id = userId;
             res.json({ userId, username });
           })
           .catch(error => res.json({ error: error.detail }));
       })
       .catch(error => console.log("error hashing password"));
+  });
+
+  userRoutes.get("/verify/:token", (req, res) => {
+    let token = req.params.token;
+    jwt.verify(token, SECRET, function(err, decoded) {
+      res.json({ username: decoded.username, userId: decoded.userId });
+    });
   });
   return userRoutes;
 };
