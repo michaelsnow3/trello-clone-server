@@ -42,6 +42,13 @@ module.exports = function selectQueries(knex) {
         .update({ title })
         .returning("*");
       return;
+    },
+
+    updateFavourite: async (boardId, favourite) => {
+      await knex("board")
+        .where({ id: boardId })
+        .update({ favourite })
+        .returning("*");
     }
   };
 };

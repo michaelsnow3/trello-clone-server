@@ -25,7 +25,8 @@ module.exports = function selectQueries(knex) {
       try {
         let userBoards = await knex("board")
           .select("id", "title", "favourite")
-          .where({ user_id: userId });
+          .where({ user_id: userId })
+          .orderBy("favourite", "desc");
         return userBoards;
       } catch (error) {
         console.log("error getting user boards", error);

@@ -27,7 +27,10 @@ module.exports = function(bcrypt, SECRET, insertQueries, selectQueries) {
         insertQueries
           .addUser(username, hash)
           .then(userId => {
-            res.json({ userId, username });
+            let token = jwt.sign({ username, userId }, SECRET, {
+              expiresIn: "24h" // expires in 24 hours
+            });
+            res.json({ userId, username, token });
           })
           .catch(error => res.json({ error: error.detail }));
       })
