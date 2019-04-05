@@ -7,7 +7,11 @@ module.exports = function(bcrypt, SECRET, insertQueries, selectQueries) {
     let { username, password } = req.body;
 
     selectQueries.getUserInfo(username, password, bcrypt).then(userId => {
-      if (!userId) res.json({ userId: null, username: null });
+      if (!userId) {
+        res.json({ userId: null, username: null });
+        return;
+      }
+
       let token = jwt.sign({ username, userId }, SECRET, {
         expiresIn: "24h" // expires in 24 hours
       });
