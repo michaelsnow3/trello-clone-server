@@ -50,7 +50,7 @@ module.exports = function(
 
   boardRoutes.post("/favourite/", (req, res) => {
     let { boardId, favourite } = req.body;
-    updateQueries.updateFavourite(boardId, favourite).then(res.json());
+    updateQueries.updateFavourite(boardId, favourite).then(res.json(favourite));
   });
 
   return boardRoutes;
