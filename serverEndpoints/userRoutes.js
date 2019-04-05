@@ -8,7 +8,7 @@ module.exports = function(bcrypt, SECRET, insertQueries, selectQueries) {
 
     selectQueries.getUserInfo(username, password, bcrypt).then(userId => {
       if (!userId) {
-        res.json({ userId: null, username: null });
+        res.json({ userId: null, username: null, incorrectLogin: true });
         return;
       }
 
