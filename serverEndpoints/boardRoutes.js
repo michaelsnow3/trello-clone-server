@@ -27,8 +27,9 @@ module.exports = function(
   boardRoutes.post("/new/", (req, res) => {
     let title = req.body.boardTitleValue;
     let userId = req.body.userId;
+    let colour = req.body.boardColour;
 
-    insertQueries.addBoard(title, userId).then(() => {
+    insertQueries.addBoard(title, userId, colour).then(() => {
       selectQueries.getUserBoards(userId).then(data => res.json(data));
     });
   });
