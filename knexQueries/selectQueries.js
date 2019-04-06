@@ -24,7 +24,7 @@ module.exports = function selectQueries(knex) {
     getUserBoards: async userId => {
       try {
         let userBoards = await knex("board")
-          .select("id", "title", "favourite")
+          .select("id", "title", "favourite", "colour")
           .where({ user_id: userId })
           .orderBy("favourite", "desc");
         return userBoards;
