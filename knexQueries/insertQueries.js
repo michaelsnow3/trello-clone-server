@@ -1,7 +1,7 @@
 module.exports = function insertQueries(knex) {
   return {
-    addBoard: async (title, userId) => {
-      await knex("board").insert({ title, user_id: userId });
+    addBoard: async (title, userId, colour) => {
+      await knex("board").insert({ title, user_id: userId, colour });
     },
     addList: async (title, boardId, position) => {
       await knex("list").insert({ title, board_id: boardId, position });
