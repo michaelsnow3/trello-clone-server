@@ -44,7 +44,7 @@ module.exports = function(bcrypt, SECRET, insertQueries, selectQueries) {
   userRoutes.get("/verify/:token", (req, res) => {
     let token = req.params.token;
     jwt.verify(token, SECRET, function(err, decoded) {
-      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
+      res.header("Access-Control-Allow-Origin");
       res.json({
         username: decoded.username,
         userId: decoded.userId
