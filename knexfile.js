@@ -20,11 +20,12 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: "pg",
     debug: true,
     connection: process.env.DB_HOST,
     migrations: {
-        tableName: 'migrations'
+      tableName: "migrations"
     },
     ssl: true
+  }
 };
