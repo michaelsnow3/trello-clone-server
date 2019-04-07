@@ -24,6 +24,7 @@ module.exports = {
     debug: true,
     connection: process.env.DATABASE_URL,
     migrations: {
+      directory: "./db/migrations",
       tableName: "migrations"
     },
     ssl: true
