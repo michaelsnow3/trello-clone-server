@@ -31,7 +31,7 @@ module.exports = function(
   cardRoutes.post("/edit/title/", (req, res) => {
     let cardId = req.body.cardId;
     let title = req.body.title;
-    console.log(cardId, title)
+    console.log(cardId, title);
     updateQueries.updateCardTitle(cardId, title).then(() => res.json());
   });
 
