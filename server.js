@@ -22,6 +22,15 @@ const insertQueries = require("./knexQueries/insertQueries.js")(knex);
 const updateQueries = require("./knexQueries/updateQueries.js")(knex);
 const deleteQueries = require("./knexQueries/deleteQueries.js")(knex);
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // user endpoints
 const userRoutes = require("./serverEndpoints/userRoutes");
 app.use(
