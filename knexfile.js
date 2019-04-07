@@ -20,19 +20,11 @@ module.exports = {
   },
 
   production: {
-    client: "pg",
-    connection: {
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      port: process.env.DB_PORT,
-      ssl: true
-    },
+    client: 'pg',
+    debug: true,
+    connection: process.env.DB_HOST,
     migrations: {
-      directory: "./db/migrations",
-      tableName: "migrations"
+        tableName: 'migrations'
     },
-    useNullAsDefault: true
-  }
+    ssl: true
 };
